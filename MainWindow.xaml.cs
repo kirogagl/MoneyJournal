@@ -25,6 +25,7 @@ namespace finWpf
         private addMoneyWindow addMoneyWindow;
         private removeWindow removeWindow;
         public ObservableCollection<string[]> listStringRecMon = new ObservableCollection<string[]>();
+        
 
         public MainWindow()
         {
@@ -221,7 +222,7 @@ namespace finWpf
             File.WriteAllText(path + "\\mj2.json", json);
         }
 
-        private void JSONDeserializer()
+        private async void JSONDeserializer()
         {
             try
             {
@@ -230,6 +231,7 @@ namespace finWpf
                 json = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.Personal)+"\\mj2.json");
                 listRecMon = JsonSerializer.Deserialize<List<MoneyRecord>>(json);
                 dataGrid.ItemsSource = listStringRecMon;
+                await allMyMoneyCounter();
             }
             catch (Exception ex)
             {
