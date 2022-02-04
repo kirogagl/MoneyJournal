@@ -7,6 +7,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.IO;
 
 namespace finWpf
 {
@@ -29,6 +32,7 @@ namespace finWpf
             addMoneyWindow = new addMoneyWindow(this);
             removeWindow = new removeWindow(this);
             dataGrid.ItemsSource = listStringRecMon;
+            JSONDeserializer();
         }
 
         /// <summary>
@@ -62,8 +66,6 @@ namespace finWpf
 
         }
 
-
-
         /// <summary>
         /// Removing record
         /// </summary>
@@ -75,9 +77,8 @@ namespace finWpf
             listStringRecMon.RemoveAt(index);
             await allMyMoneyCounter();
             acc.Dispatcher.Invoke(() => acc.Text = allMyMoney.ToString());
+            JSONSerializer();
         }
-        
-
 
         /// <summary>
         /// Adding an item to a list
@@ -90,6 +91,7 @@ namespace finWpf
             await allMyMoneyCounter();
             acc.Dispatcher.Invoke(() => acc.Text = allMyMoney.ToString());
             await Task.Delay(51);
+            JSONSerializer();
         }
 
         /// <summary>
@@ -124,7 +126,6 @@ namespace finWpf
             acc.Dispatcher.Invoke(() => acc.Text = allMyMoney.ToString());
             await Task.Delay(51);
         }
-
 
         /// <summary>
         /// Сurrency converter
@@ -167,7 +168,6 @@ namespace finWpf
                 await Task.Delay(51);
                 flag = flagCB;
             }
-
         }
 
         /// <summary>
@@ -210,6 +210,31 @@ namespace finWpf
         {
             return listRecMon;
         }
+        
 
+        private void JSONSerializer()
+        {
+            string json = JsonSerializer.Serialize< ObservableCollection<string[]>>(listStringRecMon);
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            File.WriteAllText(path + "\\mj.json", json);
+            json = JsonSerializer.Serialize<List<MoneyRecord>>(listRecMon);
+            File.WriteAllText(path + "\\mj2.json", json);
+        }
+
+        private void JSONDeserializer()
+        {
+            try
+            {
+                string json = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.Personal)+"\\mj.json");
+                listStringRecMon = JsonSerializer.Deserialize<ObservableCollection<string[]>>(json);
+                json = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.Personal)+"\\mj2.json");
+                listRecMon = JsonSerializer.Deserialize<List<MoneyRecord>>(json);
+                dataGrid.ItemsSource = listStringRecMon;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
