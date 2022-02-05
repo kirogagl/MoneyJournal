@@ -24,6 +24,7 @@ namespace finWpf
         private MoneyUnits flagCB = MoneyUnits.USD;
         private addMoneyWindow addMoneyWindow;
         private removeWindow removeWindow;
+        private EditWindow editWindow;
         public ObservableCollection<string[]> listStringRecMon = new ObservableCollection<string[]>();
         
 
@@ -52,6 +53,15 @@ namespace finWpf
         {
             removeWindow = new removeWindow(this);
             removeWindow.Show();
+        }
+
+        /// <summary>
+        /// Editing an entry
+        /// </summary>
+        private void editMoney_Click(object sender, RoutedEventArgs e)
+        {
+            editWindow = new EditWindow(this);
+            editWindow.Show();
         }
 
         /// <summary>
@@ -206,13 +216,39 @@ namespace finWpf
         /// <summary>
         /// Getter
         /// </summary>
-        /// <returns> List of MoneyRecords</returns>
+        /// <returns>List of MoneyRecords</returns>
         public List<MoneyRecord> getListRecMon()
         {
             return listRecMon;
         }
-        
 
+        /// <summary>
+        /// Getter
+        /// </summary>
+        /// <returns>ObservableCollection of string array</returns>
+        public ObservableCollection<string[]> GetListStringRecMon()
+        {
+            return listStringRecMon;
+        }
+
+        /// <summary>
+        /// Setter
+        /// </summary>
+        /// <param name="listStringRecMon">ObservableCollection of string array</param>
+        /// <param name="listRecMon">List of MoneyRecords</param>
+        public async void setListsAsync(ObservableCollection<string[]> listStringRecMon, List<MoneyRecord> listRecMon)
+        {
+            this.listStringRecMon = listStringRecMon;
+            this.listRecMon = listRecMon;
+
+            dataGrid.ItemsSource = listStringRecMon;
+            await allMyMoneyCounter();
+            JSONSerializer();
+        }
+        
+        /// <summary>
+        /// Serialize
+        /// </summary>
         private void JSONSerializer()
         {
             string json = JsonSerializer.Serialize< ObservableCollection<string[]>>(listStringRecMon);
@@ -222,6 +258,9 @@ namespace finWpf
             File.WriteAllText(path + "\\mj2.json", json);
         }
 
+        /// <summary>
+        /// Deserialize
+        /// </summary>
         private async void JSONDeserializer()
         {
             try
@@ -238,5 +277,6 @@ namespace finWpf
                 MessageBox.Show(ex.Message);
             }
         }
+
     }
 }
