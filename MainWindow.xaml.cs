@@ -22,9 +22,12 @@ namespace finWpf
         private decimal allMyMoney = 0;
         private MoneyUnits flag = MoneyUnits.USD;
         private MoneyUnits flagCB = MoneyUnits.USD;
+        private AllMyMoneyWindow allMyMoneyWindow;
         private addMoneyWindow addMoneyWindow;
         private removeWindow removeWindow;
         private EditWindow editWindow;
+        private yaDisk ya;
+        private bool isRequestsExist = true;
         public ObservableCollection<string[]> listStringRecMon = new ObservableCollection<string[]>();
         
 
@@ -62,6 +65,12 @@ namespace finWpf
         {
             editWindow = new EditWindow(this);
             editWindow.Show();
+        }
+
+        private void allMyMoney_Click(object sender, RoutedEventArgs e)
+        {
+            allMyMoneyWindow = new AllMyMoneyWindow(this);
+            allMyMoneyWindow.Show();
         }
 
         /// <summary>
@@ -114,28 +123,38 @@ namespace finWpf
 
             foreach (var i in listRecMon)
             {
-
-                if (i.MonUnit == flagCB && i.Type == Types.Income)
-                    allMyMoney += i.Money;
-                else if (i.MonUnit == flagCB && i.Type == Types.Spending)
-                    allMyMoney -= i.Money;
-                else
+                if (isRequestsExist)
                 {
-                    if (i.Type == Types.Income)
+                    if (i.MonUnit == flagCB && i.Type == Types.Income)
+                        allMyMoney += i.Money;
+                    else if (i.MonUnit == flagCB && i.Type == Types.Spending)
+                        allMyMoney -= i.Money;
+                    else
                     {
-                        var j = await convertUnit(i);
-                        allMyMoney += j;
+                        if (i.Type == Types.Income)
+                        {
+                            var j = await convertUnit(i);
+                            allMyMoney += j;
 
-                    }
-                    else if (i.Type == Types.Spending)
-                    {
-                        var j = await convertUnit(i);
-                        allMyMoney -= j;
+                        }
+                        else if (i.Type == Types.Spending)
+                        {
+                            var j = await convertUnit(i);
+                            allMyMoney -= j;
+                        }
                     }
                 }
             }
-            acc.Dispatcher.Invoke(() => acc.Text = allMyMoney.ToString());
-            await Task.Delay(51);
+            if (isRequestsExist) {
+                acc.Dispatcher.Invoke(() => acc.Text = Decimal.Round(allMyMoney, 2, MidpointRounding.ToEven).ToString());
+                await Task.Delay(51);
+            }
+            else
+            {
+                acc.Dispatcher.Invoke(() => acc.Text = "Error");
+                await Task.Delay(51);
+
+            }
         }
 
         /// <summary>
@@ -145,10 +164,13 @@ namespace finWpf
         private async Task<decimal> convertUnit(MoneyRecord mr)
         {
             string Price = await GetPrice(mr.MonUnit.ToString(), flagCB.ToString());
-
-            Converter? a = Newtonsoft.Json.JsonConvert.DeserializeObject<Converter>(Price);
-            NumberFormatInfo nfi = new NumberFormatInfo() { NumberDecimalSeparator = "." };
-            return mr.Money * decimal.Parse(a.data.value, nfi);
+            if (Price != "1" && isRequestsExist)
+            {
+                Converter? a = Newtonsoft.Json.JsonConvert.DeserializeObject<Converter>(Price);
+                NumberFormatInfo nfi = new NumberFormatInfo() { NumberDecimalSeparator = "." };
+                return mr.Money * Decimal.Round(decimal.Parse(a.data.value, nfi), 3, MidpointRounding.ToEven);
+            }
+            else return 1;
         }
 
         /// <summary>
@@ -175,7 +197,7 @@ namespace finWpf
                 Converter? a = Newtonsoft.Json.JsonConvert.DeserializeObject<Converter>(Price);
                 NumberFormatInfo nfi = new NumberFormatInfo() { NumberDecimalSeparator = "." };
                 allMyMoney *= decimal.Parse(a.data.value, nfi);
-                acc.Dispatcher.Invoke(() => acc.Text = allMyMoney.ToString());
+                acc.Dispatcher.Invoke(() => acc.Text = Decimal.Round(allMyMoney, 2, MidpointRounding.ToEven).ToString());
                 await Task.Delay(51);
                 flag = flagCB;
             }
@@ -199,6 +221,12 @@ namespace finWpf
                 results[9] = "value";
                 result = "";
                 if (results[3] == "500") throw new Exception();
+                if (results[3] == "400")
+                {
+                    isRequestsExist = false;
+                    MessageBox.Show("Low request limit", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    throw new Exception();
+                }
                 for (int i = 0; i < 13; i++)
                 {
                     if (i != 12)
@@ -261,7 +289,7 @@ namespace finWpf
         /// <summary>
         /// Deserialize
         /// </summary>
-        private async void JSONDeserializer()
+        public async void JSONDeserializer()
         {
             try
             {
@@ -278,5 +306,11 @@ namespace finWpf
             }
         }
 
+        private void saveToCloud_Click(object sender, RoutedEventArgs e)
+        {
+            ya = new yaDisk(this);
+            ya.ClientID = "dab62ffa41da4f34bdbf493060a7702a";
+            ya.Show();
+        }
     }
 }

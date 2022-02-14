@@ -5,12 +5,30 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="favicon.ico" />
+    <None Remove="favicon.png" />
+    <None Remove="Icon.png" />
+    <None Remove="Untitled document.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Icon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AngleSharp" Version="0.16.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.ObjectModel" Version="4.3.0" />
+    <PackageReference Include="YandexDisk.Client" Version="1.3.22" />
+  </ItemGroup>
+
+  <ItemGroup>    <Resource Include="Icon.png" />
+
+    
   </ItemGroup>
 
 </Project>

@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:finWpf"
         mc:Ignorable="d"
-        Title="Add record" Height="215" Width="523">
+        Title="Add record" Height="Auto" Width="Auto" MaxWidth="1000" SizeToContent="WidthAndHeight">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.3*"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -20,17 +20,17 @@
         <StackPanel Grid.Column="0">
             <Label Content="Money count"></Label>
             <Label Content="Monetary unit"></Label>
-            <Label Content="Desctiption"></Label>
+            <Label Content="Desctiption" Height="{Binding }"></Label>
             <Label Content="Date"></Label>
             <Label Content="Type"></Label>
         </StackPanel>
 
         <GridSplitter Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Width="3" Grid.RowSpan="3"/>
 
-        <StackPanel Grid.Column="2">
+        <StackPanel Grid.Column="2" MinWidth="400">
             <TextBox x:Name="mc" TextWrapping="Wrap" Width="Auto" FontSize="18"/>
             <ComboBox x:Name="mu" Width="Auto" FontSize="18"/>
-            <TextBox x:Name="ds" TextWrapping="Wrap" Width="Auto" FontSize="18"/>
+            <TextBox x:Name="ds" TextWrapping="Wrap" Width="Auto" MaxWidth="800" FontSize="18"/>
             <DatePicker x:Name="calendar" FirstDayOfWeek="Monday"/>
             <ComboBox x:Name="ty" Width="Auto" FontSize="18"/>
         </StackPanel>
