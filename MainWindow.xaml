@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib" 
-        xmlns:local="clr-namespace:finWpf"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:res="clr-namespace:finWpf.Resources"
+        
         mc:Ignorable="d"
         
         Title="Money Journal" Height="Auto" Width="Auto" SizeToContent="WidthAndHeight" Icon="/icon.png" WindowStartupLocation="CenterScreen">
@@ -31,17 +32,17 @@
                 </col:ArrayList>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Money" Binding="{Binding [0]}" Width="Auto" CanUserSort="True" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Money Unit" Binding="{Binding [1]}" Width="Auto" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Descriprion" Binding="{Binding [2]}" Width="Auto" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Date" Binding="{Binding [3]}" Width="Auto" CanUserSort="True" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Type" Binding="{Binding [4]}" Width="Auto" CanUserSort="True" IsReadOnly="True"/>
+                <DataGridTextColumn Header="{x:Static res:Local.m_Money}" Binding="{Binding [0]}" Width="Auto" CanUserSort="True" IsReadOnly="True"/>
+                <DataGridTextColumn Header="{x:Static res:Local.m_MonUnit}" Binding="{Binding [1]}" Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="{x:Static res:Local.m_Desc}" Binding="{Binding [2]}" Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="{x:Static res:Local.m_Date}" Binding="{Binding [3]}" Width="Auto" CanUserSort="True" IsReadOnly="True"/>
+                <DataGridTextColumn Header="{x:Static res:Local.m_Type}" Binding="{Binding [4]}" Width="Auto" CanUserSort="True" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <GridSplitter Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Width="3" Grid.RowSpan="3"/>
+        <GridSplitter Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Width="3" Grid.RowSpan="4"/>
 
-        <TextBlock Text="Current account = " Grid.Column="2" Height="20" VerticalAlignment="Top"/>
+        <TextBlock Text="{x:Static res:Local.m_CurAmount}" Grid.Column="2" Height="20" Width="Auto" VerticalAlignment="Top"/>
         <TextBlock x:Name="acc" Grid.Column="3" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="Auto" Grid.ColumnSpan="1" />
         <ComboBox x:Name="unitFlag" SelectedIndex="0" SelectionChanged="unitFlag_SelectionChanged" Grid.Column="5" Grid.Row="0" Width="140" Height="30" VerticalAlignment="Top">
             <TextBlock Text="United States dollar"/>
@@ -56,13 +57,13 @@
             <TextBlock Text="Turkish lira"/>
             <TextBlock Text="Chinese Yuan Renminbi"/>
         </ComboBox>
-        <Button x:Name="allMyMoneys" Width="110" Height="30" Background="Orange" Grid.Column="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Grid.Row="1" Content="All My Money" Click="allMyMoney_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-        <Button x:Name="editMoney" Width="140" Height="30" Background="LightBlue" Grid.Column="5" Grid.Row="1" Content="Edit Money Record" HorizontalAlignment ="Right" VerticalAlignment="Bottom" Click="editMoney_Click"/>
+        <Button x:Name="allMyMoneys" Width="110" Height="30" Background="Orange" Grid.Column="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Grid.Row="1" Content="{x:Static res:Local.m_AllMyMoneyBut}" Click="allMyMoney_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <Button x:Name="editMoney" Width="140" Height="30" Background="LightBlue" Grid.Column="5" Grid.Row="1" Content="{x:Static res:Local.m_EditMonRecBut}" HorizontalAlignment ="Right" VerticalAlignment="Bottom" Click="editMoney_Click"/>
 
-        <Button x:Name="addMoney" Width="110" Height="30" Background="LightGreen" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2"  Content="Add Money Record" Click="addMoney_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-        <Button x:Name="removeMoney" Width="140" Height="30" Background="LightPink" Grid.Column="5" Grid.Row="2" Content="Remove Money Record" Click="removeMoney_Click" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+        <Button x:Name="addMoney" Width="110" Height="30" Background="LightGreen" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2"  Content="{x:Static res:Local.m_AddMonRecBut}" Click="addMoney_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <Button x:Name="removeMoney" Width="140" Height="30" Background="LightPink" Grid.Column="5" Grid.Row="2" Content="{x:Static res:Local.m_RemoveMonRecBut}" Click="removeMoney_Click" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
 
-        <Button x:Name="converter" Width="110" Height="30" Background="Black" Foreground="White" Grid.Column="3" Grid.Row="4" Content="Converter" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="saveToCloud_Click"/>
-        <Button x:Name="saveToCloud" Width="140" Height="30" Background="DarkBlue" Foreground="White" Grid.Column="4" Grid.Row="4" Content="Working with the cloud" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="saveToCloud_Click"/>
+        <Button x:Name="converter" Width="110" Height="30" Background="Black" Foreground="White" Grid.Column="3" Grid.Row="4" Content="{x:Static res:Local.m_ConverterBut}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="saveToCloud_Click"/>
+        <Button x:Name="saveToCloud" Width="140" Height="30" Background="DarkBlue" Foreground="White" Grid.Column="4" Grid.Row="4" Content="{x:Static res:Local.m_CloudBut}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="saveToCloud_Click"/>
     </Grid>
 </Window>

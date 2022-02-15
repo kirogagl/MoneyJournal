@@ -151,7 +151,7 @@ namespace finWpf
             }
             else
             {
-                acc.Dispatcher.Invoke(() => acc.Text = "Error");
+                acc.Dispatcher.Invoke(() => acc.Text = finWpf.Resources.Local.err);
                 await Task.Delay(51);
 
             }
@@ -224,7 +224,7 @@ namespace finWpf
                 if (results[3] == "400")
                 {
                     isRequestsExist = false;
-                    MessageBox.Show("Low request limit", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(finWpf.Resources.Local.lowReqLimit, finWpf.Resources.Local.warn, MessageBoxButton.OK, MessageBoxImage.Warning);
                     throw new Exception();
                 }
                 for (int i = 0; i < 13; i++)

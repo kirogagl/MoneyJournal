@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:finWpf"
+        xmlns:res="clr-namespace:finWpf.Resources"
         mc:Ignorable="d"
-        Title="yaDisk" Height="450" Width="920">
-    <Grid>
+        Title="yaDisk" Height="450" Width="970">
+    <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
@@ -19,8 +19,8 @@
         </Grid.RowDefinitions>
         <WebBrowser x:Name="wb" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Width="600" LoadCompleted="wb_LoadCompleted" Loaded="wb_Loaded"/>        
         <GridSplitter Grid.Column="1" Grid.RowSpan="2" Width="2"/>
-        <TextBlock Text="Warning: Do not share this code with other people." Grid.Column="2" Grid.ColumnSpan="2" TextAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="Red" Background="Black"/>
-        <Button x:Name="Save" Content="Save" Grid.Column="2" Grid.Row="1" Width="150" Height="30" HorizontalAlignment="Right" Background="LightGreen" Click="Save_Click"/>
-        <Button x:Name="Load" Content="Load" Grid.Column="3" Grid.Row="1" Width="150" Height="30" HorizontalAlignment="Right" Background="AliceBlue" Click="Load_Click"/>
+        <TextBlock Text="{x:Static res:Local.ya_Warn}" Grid.Column="2" Grid.ColumnSpan="2" TextAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="Red" Background="Black"/>
+        <Button x:Name="Save" Content="{x:Static res:Local.ya_Save}" Grid.Column="2" Grid.Row="1" Width="150" Height="30" HorizontalAlignment="Right" Background="LightGreen" Click="Save_Click"/>
+        <Button x:Name="Load" Content="{x:Static res:Local.ya_Load}" Grid.Column="3" Grid.Row="1" Width="150" Height="30" HorizontalAlignment="Right" Background="AliceBlue" Click="Load_Click"/>
     </Grid>
 </Window>

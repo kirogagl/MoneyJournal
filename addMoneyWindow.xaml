@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:finWpf"
+        xmlns:res="clr-namespace:finWpf.Resources"
+
         mc:Ignorable="d"
         Title="Add record" Height="Auto" Width="Auto" MaxWidth="1000" SizeToContent="WidthAndHeight">
     <Grid>
@@ -18,11 +19,11 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0">
-            <Label Content="Money count"></Label>
-            <Label Content="Monetary unit"></Label>
-            <Label Content="Desctiption" Height="{Binding }"></Label>
-            <Label Content="Date"></Label>
-            <Label Content="Type"></Label>
+            <Label Content="{x:Static res:Local.add_Money}"></Label>
+            <Label Content="{x:Static res:Local.add_MonUnit}"></Label>
+            <Label Content="{x:Static res:Local.add_Desc}" Height="{Binding }"></Label>
+            <Label Content="{x:Static res:Local.add_Date}"></Label>
+            <Label Content="{x:Static res:Local.add_Type}"></Label>
         </StackPanel>
 
         <GridSplitter Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Width="3" Grid.RowSpan="3"/>
@@ -45,8 +46,8 @@
                 <RowDefinition Height="1.5*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button x:Name="addBut" Content="Add" Grid.Column="1" Grid.Row="2" Background="LightGreen" Click="addBut_Click"/>
-            <Button x:Name="cancBut" Content="Cancel" Grid.Column="2" Grid.Row="2" Background="LightGray" Click="cancBut_Click"/>
+            <Button x:Name="addBut" Content="{x:Static res:Local.add_AddBut}" Grid.Column="1" Grid.Row="2" Background="LightGreen" Click="addBut_Click"/>
+            <Button x:Name="cancBut" Content="{x:Static res:Local.add_CancelBut}" Grid.Column="2" Grid.Row="2" Background="LightGray" Click="cancBut_Click"/>
         </Grid>
     </Grid>
 </Window>
