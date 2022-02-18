@@ -138,17 +138,35 @@
   <data name="add_Type" xml:space="preserve">
     <value>Тип</value>
   </data>
+  <data name="AllMyMoney" xml:space="preserve">
+    <value>Все мои деньги</value>
+  </data>
+  <data name="a_Title" xml:space="preserve">
+    <value>Добавить запись</value>
+  </data>
+  <data name="c_Apply" xml:space="preserve">
+    <value>Подтвердить ключ API</value>
+  </data>
+  <data name="c_Restore" xml:space="preserve">
+    <value>Востановить ключ API</value>
+  </data>
+  <data name="c_Title" xml:space="preserve">
+    <value>Конвертер валют</value>
+  </data>
   <data name="edit_ApplyBut" xml:space="preserve">
     <value>Применить изменения</value>
   </data>
   <data name="err" xml:space="preserve">
     <value>Ошибка</value>
   </data>
+  <data name="e_Title" xml:space="preserve">
+    <value>Редактировать запись</value>
+  </data>
   <data name="in" xml:space="preserve">
     <value>Доход</value>
   </data>
   <data name="lowReqLimit" xml:space="preserve">
-    <value>Низкий лимит запросов</value>
+    <value>Низкий лимит запросов. Вы можете задать свой ключ в окне конвертера.</value>
   </data>
   <data name="m_AddMonRecBut" xml:space="preserve">
     <value>Добавить запись</value>
@@ -192,6 +210,9 @@
   <data name="rem_RemoveBut" xml:space="preserve">
     <value>Удалить</value>
   </data>
+  <data name="r_Title" xml:space="preserve">
+    <value>Удалить запись</value>
+  </data>
   <data name="warn" xml:space="preserve">
     <value>Предупреждение</value>
   </data>
@@ -203,5 +224,8 @@
   </data>
   <data name="ya_Warn" xml:space="preserve">
     <value>Предупреждение: Не делитесь этим кодом с другими людьми!</value>
+  </data>
+  <data name="y_Title" xml:space="preserve">
+    <value>Сохранение на Яндекс диск</value>
   </data>
 </root>

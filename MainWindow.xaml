@@ -63,7 +63,7 @@
         <Button x:Name="addMoney" Width="110" Height="30" Background="LightGreen" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2"  Content="{x:Static res:Local.m_AddMonRecBut}" Click="addMoney_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         <Button x:Name="removeMoney" Width="140" Height="30" Background="LightPink" Grid.Column="5" Grid.Row="2" Content="{x:Static res:Local.m_RemoveMonRecBut}" Click="removeMoney_Click" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
 
-        <Button x:Name="converter" Width="110" Height="30" Background="Black" Foreground="White" Grid.Column="3" Grid.Row="4" Content="{x:Static res:Local.m_ConverterBut}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="saveToCloud_Click"/>
+        <Button x:Name="converterBut" Width="110" Height="30" Background="Black" Foreground="White" Grid.Column="3" Grid.Row="4" Content="{x:Static res:Local.m_ConverterBut}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="converterBut_Click"/>
         <Button x:Name="saveToCloud" Width="140" Height="30" Background="DarkBlue" Foreground="White" Grid.Column="4" Grid.Row="4" Content="{x:Static res:Local.m_CloudBut}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="saveToCloud_Click"/>
     </Grid>
 </Window>

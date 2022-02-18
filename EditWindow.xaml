@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:res="clr-namespace:finWpf.Resources"
         mc:Ignorable="d"
-        Title="EditWindow" Height="251" Width="800" SizeToContent="WidthAndHeight">
+        Title="{x:Static res:Local.e_Title}" Height="251" Width="800" SizeToContent="WidthAndHeight">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>

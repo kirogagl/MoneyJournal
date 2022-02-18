@@ -83,8 +83,17 @@ namespace finWpf
                                 await api.Files.UploadAsync(link, fs);
                             }
                         }
+                        files = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Key.txt");
+                        Link? lk = await api.Files.GetUploadLinkAsync("/" + name + "/" + Path.GetFileName(files.First()), overwrite: true);
+                        using (var fs = File.OpenRead(files.First()))
+                        {
+                            await api.Files.UploadAsync(lk, fs);
+                        }
+                        MessageBox.Show("Done", "Done", MessageBoxButton.OK, MessageBoxImage.Hand);
                     }
+                    
                 }
+                
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
@@ -124,6 +133,15 @@ namespace finWpf
                             link = await api.Files.GetDownloadLinkAsync("/" + name + "/" + "mj2.json");
                             file = await api.Files.DownloadAsync(link);
                             using (var fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\mj2.json", FileMode.OpenOrCreate, FileAccess.Write))
+                            {
+                                byte[] buffer = new byte[file.Length];
+                                file.Read(buffer, 0, (int)file.Length);
+                                fs.Write(buffer, 0, buffer.Length);
+                                file.Close();
+                            }
+                            link = await api.Files.GetDownloadLinkAsync("/" + name + "/" + "Key.txt");
+                            file = await api.Files.DownloadAsync(link);
+                            using (var fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Key.txt", FileMode.OpenOrCreate, FileAccess.Write))
                             {
                                 byte[] buffer = new byte[file.Length];
                                 file.Read(buffer, 0, (int)file.Length);

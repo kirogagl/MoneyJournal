@@ -26,10 +26,11 @@ namespace finWpf
         private addMoneyWindow addMoneyWindow;
         private removeWindow removeWindow;
         private EditWindow editWindow;
+        private ConverterWindow converterWindow;
         private yaDisk ya;
         private bool isRequestsExist = true;
         public ObservableCollection<string[]> listStringRecMon = new ObservableCollection<string[]>();
-        
+        public string curAPIKey = "31dec130c60c25e40c913e7536c4d8b1";
 
         public MainWindow()
         {
@@ -153,7 +154,6 @@ namespace finWpf
             {
                 acc.Dispatcher.Invoke(() => acc.Text = finWpf.Resources.Local.err);
                 await Task.Delay(51);
-
             }
         }
 
@@ -216,7 +216,7 @@ namespace finWpf
                 if (val.Equals(uta)) throw new ArgumentException();
                 string valuta = val + uta;
                 using var client = new HttpClient();
-                var result = await client.GetStringAsync($"https://currate.ru/api/?get=rates&pairs={valuta}&key=31dec130c60c25e40c913e7536c4d8b1");
+                var result = await client.GetStringAsync($"https://currate.ru/api/?get=rates&pairs={valuta}&key={curAPIKey}");
                 var results = result.Split("\"");
                 results[9] = "value";
                 result = "";
@@ -277,13 +277,15 @@ namespace finWpf
         /// <summary>
         /// Serialize
         /// </summary>
-        private void JSONSerializer()
+        public void JSONSerializer()
         {
             string json = JsonSerializer.Serialize< ObservableCollection<string[]>>(listStringRecMon);
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             File.WriteAllText(path + "\\mj.json", json);
             json = JsonSerializer.Serialize<List<MoneyRecord>>(listRecMon);
             File.WriteAllText(path + "\\mj2.json", json);
+            string api = curAPIKey;
+            File.WriteAllText(path + "\\Key.txt", api);
         }
 
         /// <summary>
@@ -291,6 +293,12 @@ namespace finWpf
         /// </summary>
         public async void JSONDeserializer()
         {
+            try
+            {
+                curAPIKey = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Key.txt");
+
+            }
+            catch (Exception) { }
             try
             {
                 string json = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.Personal)+"\\mj.json");
@@ -306,11 +314,20 @@ namespace finWpf
             }
         }
 
+        /// <summary>
+        /// Yandex drive
+        /// </summary>
         private void saveToCloud_Click(object sender, RoutedEventArgs e)
         {
             ya = new yaDisk(this);
             ya.ClientID = "dab62ffa41da4f34bdbf493060a7702a";
             ya.Show();
+        }
+
+        private void converterBut_Click(object sender, RoutedEventArgs e)
+        {
+            converterWindow = new ConverterWindow(this);
+            converterWindow.Show();
         }
     }
 }

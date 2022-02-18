@@ -79,6 +79,15 @@ namespace finWpf.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Adding record.
+        /// </summary>
+        public static string a_Title {
+            get {
+                return ResourceManager.GetString("a_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Add.
         /// </summary>
         public static string add_AddBut {
@@ -142,6 +151,51 @@ namespace finWpf.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на All my money.
+        /// </summary>
+        public static string AllMyMoney {
+            get {
+                return ResourceManager.GetString("AllMyMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Apply API Key.
+        /// </summary>
+        public static string c_Apply {
+            get {
+                return ResourceManager.GetString("c_Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Restore API Key.
+        /// </summary>
+        public static string c_Restore {
+            get {
+                return ResourceManager.GetString("c_Restore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Converter.
+        /// </summary>
+        public static string c_Title {
+            get {
+                return ResourceManager.GetString("c_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Editing record.
+        /// </summary>
+        public static string e_Title {
+            get {
+                return ResourceManager.GetString("e_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Apply changes.
         /// </summary>
         public static string edit_ApplyBut {
@@ -160,7 +214,7 @@ namespace finWpf.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Low request limit.
+        ///   Ищет локализованную строку, похожую на Low request limit. You can set your key in the converter window..
         /// </summary>
         public static string lowReqLimit {
             get {
@@ -277,6 +331,15 @@ namespace finWpf.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Removing record.
+        /// </summary>
+        public static string r_Title {
+            get {
+                return ResourceManager.GetString("r_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Remove.
         /// </summary>
         public static string rem_RemoveBut {
@@ -291,6 +354,15 @@ namespace finWpf.Resources {
         public static string warn {
             get {
                 return ResourceManager.GetString("warn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Saving to Yandex disk.
+        /// </summary>
+        public static string y_Title {
+            get {
+                return ResourceManager.GetString("y_Title", resourceCulture);
             }
         }
         

@@ -6,7 +6,7 @@
         xmlns:res="clr-namespace:finWpf.Resources"
 
         mc:Ignorable="d"
-        Title="Add record" Height="Auto" Width="Auto" MaxWidth="1000" SizeToContent="WidthAndHeight">
+        Title="{x:Static res:Local.a_Title}" Height="Auto" Width="Auto" MaxWidth="1000" SizeToContent="WidthAndHeight">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
